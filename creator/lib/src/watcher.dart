@@ -1,5 +1,4 @@
 import 'package:creator/creator.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
 class Watcher extends StatefulWidget {
