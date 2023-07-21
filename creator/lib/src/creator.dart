@@ -1,3 +1,4 @@
+
 part 'ref.dart';
 
 /// Creator holds a state of type T and needs a reference to the dependency graph
@@ -33,8 +34,8 @@ class Element<T> {
   }
 
   @override
-  bool operator ==(other) {
-    return (other is Element) && other.state == state;
+  bool operator ==(covariant Element other) {
+    return other.state == state;
   }
   
   @override
