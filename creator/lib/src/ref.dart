@@ -48,4 +48,27 @@ class Ref {
     }
   }
 
+  /// Delete the creator if it has no watcher. Also delete other creators
+  /// who loses all their watchers
+  void dispose(Creator creator) {
+    if ((_graph[creator] ?? {}).isNotEmpty) {
+      return; // The creator is being watched by someone, cannot dispose it
+    }
+
+    _elements.remove(creator);
+    _graph.remove(creator);
+    
+    for (final c in _elements.keys.toSet()) {
+      if ((_graph[c] ?? {}).contains(creator)) {
+        _graph[c]!.remove(creator);
+        dispose(c); // Dispose c if creator is the only watcher of c
+      }
+    }
+
+  }
+
+  void recreate(Creator creator) {
+    _element(creator).recreate();
+  }
+
 }
